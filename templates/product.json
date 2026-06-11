@@ -14,9 +14,9 @@
             "icons_style": "none",
             "slideshow_controls_style": "counter",
             "slideshow_mobile_controls_style": "dots",
-            "thumbnail_position": "right",
+            "thumbnail_position": "bottom",
             "thumbnail_width": 44,
-            "aspect_ratio": "adapt",
+            "aspect_ratio": "1",
             "constrain_to_viewport": true,
             "media_fit": "contain",
             "media_radius": 0,
@@ -58,99 +58,31 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "group_icgrde": {
-              "type": "group",
-              "name": "Header",
+            "title": {
+              "type": "product-title",
               "settings": {
-                "open_in_new_tab": false,
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 12,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
-                "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h1",
+                "font": "var(--font-h1--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {
-                "text_xrnftG": {
-                  "type": "text",
-                  "name": "Product title",
-                  "settings": {
-                    "text": "<h1>{{ closest.product.title }}</h1>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "h3",
-                    "font": "var(--font-primary--family)",
-                    "font_size": "",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "price_tVjtKg": {
-                  "type": "price",
-                  "settings": {
-                    "show_sale_price_first": true,
-                    "show_installments": false,
-                    "show_tax_info": false,
-                    "type_preset": "paragraph",
-                    "width": "100%",
-                    "alignment": "left",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "color": "var(--color-foreground)",
-                    "padding-block-start": 4,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_xrnftG",
-                "price_tVjtKg"
-              ]
+              "blocks": {}
             },
-            "divider_VJhene": {
+            "divider": {
               "type": "_divider",
               "name": "t:names.divider",
               "settings": {
@@ -162,11 +94,58 @@
               },
               "blocks": {}
             },
-            "variant_picker_R3rGDr": {
+            "price": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": true,
+                "type_preset": "h4",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1.4rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "shipping_note": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Shipping calculated at checkout.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "0.85rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 2,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "variant_picker": {
               "type": "variant-picker",
               "settings": {
                 "variant_style": "buttons",
-                "show_swatches": false,
+                "show_swatches": true,
                 "alignment": "left",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -175,7 +154,7 @@
               },
               "blocks": {}
             },
-            "buy_buttons_eYQEYi": {
+            "buy_buttons": {
               "type": "buy-buttons",
               "settings": {
                 "stacking": true,
@@ -209,39 +188,98 @@
               },
               "block_order": []
             },
-            "text_aEtTtq": {
-              "type": "text",
-              "name": "Product description",
+            "description": {
+              "type": "accordion",
               "settings": {
-                "text": "{{ closest.product.description }}",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
+                "open_first": true,
+                "icon_style": "plus",
+                "padding-block-start": 8,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {}
+              "blocks": {
+                "row_desc": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Product Description"
+                  },
+                  "blocks": {
+                    "d": {
+                      "type": "product-description",
+                      "settings": {
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "color": "var(--color-foreground)",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "d"
+                  ]
+                },
+                "row_ship": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Shipping & Returns"
+                  },
+                  "blocks": {
+                    "s": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Free express shipping on orders over $80. Orders ship within 1–2 business days and arrive in 5–9 business days. 30-day money-back guarantee — return any unworn pair for a full refund.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.95rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "s"
+                  ]
+                }
+              },
+              "block_order": [
+                "row_desc",
+                "row_ship"
+              ]
             }
           },
           "block_order": [
-            "group_icgrde",
-            "divider_VJhene",
-            "variant_picker_R3rGDr",
-            "buy_buttons_eYQEYi",
-            "text_aEtTtq"
+            "title",
+            "divider",
+            "price",
+            "shipping_note",
+            "variant_picker",
+            "buy_buttons",
+            "description"
           ]
         }
       },
@@ -446,17 +484,126 @@
         "padding_block_end": 40
       }
     },
+    "avelo_panels": {
+      "type": "avelo-image-panels",
+      "blocks": {
+        "p1": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/photo-1556906781-9a412961c28c_f19699d6-8a81-4022-a53e-72502d573d0a.jpg",
+            "eyebrow": "Hidden elevation",
+            "title": "Up to 10cm taller",
+            "text": "Concealed inside the midsole"
+          }
+        },
+        "p2": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/photo-1549298916-b41d501d3772_a8e17fb2-63d6-43ea-9c20-a2d74f5067d3.jpg",
+            "eyebrow": "Undetectable",
+            "title": "Looks like a normal shoe",
+            "text": "No one can tell you're wearing it"
+          }
+        },
+        "p3": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/photo-1460353581641-37baddab0fa2_bbc9c5ec-d7d9-43b5-8620-8ae1009c6cd3.jpg",
+            "eyebrow": "Engineered",
+            "title": "All-day comfort",
+            "text": "Ergonomic, weight-balanced support"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "name": "Invisible Boost",
+      "settings": {
+        "heading": "Invisible boost. Visible results.",
+        "body": "Every pair is engineered with a precision-tuned midsole delivering up to 10cm of hidden height. All the lift, none of the look.",
+        "color_scheme": "scheme-1",
+        "padding_block_start": 80,
+        "padding_block_end": 40
+      }
+    },
+    "avelo_tabs": {
+      "type": "avelo-tabbed-features",
+      "blocks": {
+        "t1": {
+          "type": "tab",
+          "settings": {
+            "label": "Engineered",
+            "image": "shopify://shop_images/photo-1539185441755-769473a23570_fa5a71a9-2d3e-4b3c-9736-cd92b51f0607.jpg",
+            "heading": "Precision-engineered elevation",
+            "body": "A multi-density midsole adds hidden height while keeping the shoe balanced and natural to walk in.",
+            "bullets": "Up to 12cm of hidden lift|Weight-balanced for stability|Looks like a standard sole"
+          }
+        },
+        "t2": {
+          "type": "tab",
+          "settings": {
+            "label": "Impact",
+            "image": "shopify://shop_images/photo-1542291026-7eec264c27ff.jpg",
+            "heading": "Shock-absorbing every step",
+            "body": "A responsive cushioning core absorbs impact and returns energy, so all-day wear feels effortless.",
+            "bullets": "High-rebound foam core|Reduced joint fatigue|Stable heel-to-toe transition"
+          }
+        },
+        "t3": {
+          "type": "tab",
+          "settings": {
+            "label": "Comfort",
+            "image": "shopify://shop_images/photo-1595341888016-a392ef81b7de_7133890c-5978-42de-ade9-c939fc9b6bef.jpg",
+            "heading": "All-day, no-pain comfort",
+            "body": "Memory-foam footbeds and a breathable lining keep your feet comfortable from morning to night.",
+            "bullets": "Memory-foam footbed|Breathable moisture-wicking lining|Premium ergonomic fit"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "name": "Advantage Engineered",
+      "settings": {
+        "kicker": "Built different",
+        "heading": "Advantage, engineered.",
+        "color_scheme": "scheme-2",
+        "padding_block_start": 80,
+        "padding_block_end": 80
+      }
+    },
+    "avelo_media": {
+      "type": "avelo-media-text",
+      "name": "First Impression",
+      "settings": {
+        "image": "shopify://shop_images/photo-1488161628813-04466f872be2.jpg",
+        "image_position": "right",
+        "kicker": "Confidence",
+        "heading": "First impressions count.",
+        "body": "<p>Height shapes how a room reads you — before you say a word. AVELO gives you that quiet edge of presence and posture, so you walk in already standing taller.</p>",
+        "button_label": "Shop the collection",
+        "button_link": "shopify://collections/best-sellers",
+        "color_scheme": "scheme-1",
+        "padding_block_start": 40,
+        "padding_block_end": 80
+      }
+    },
     "avelo_guarantee": {
       "type": "avelo-guarantee",
       "name": "Guarantee",
       "settings": {
         "seal_top": "30-DAY",
         "seal_bottom": "GUARANTEE",
-        "heading": "Not happy? Send them back.",
+        "heading": "Not happy with your order?",
         "body": "<p>Try AVELO risk-free for 30 days. If you don't love the way you look and feel, return them for a full refund — no questions asked.</p>",
-        "color_scheme": "scheme-1",
-        "padding_block_start": 56,
-        "padding_block_end": 56
+        "color_scheme": "scheme-2",
+        "padding_block_start": 64,
+        "padding_block_end": 64
       }
     },
     "avelo_reviews": {
@@ -550,7 +697,7 @@
           "type": "faq",
           "settings": {
             "question": "How long does shipping take?",
-            "answer": "<p>Orders ship within 1–2 business days and typically arrive in 5–9 business days. Free shipping on orders over $80.</p>"
+            "answer": "<p>Orders ship within 1-2 business days and typically arrive in 5-9 business days. Free shipping on orders over $80.</p>"
           }
         }
       },
@@ -564,7 +711,7 @@
       "name": "FAQ",
       "settings": {
         "kicker": "Good to know",
-        "heading": "Frequently asked questions",
+        "heading": "FAQs",
         "footer_text": "<p>Still have a question? Email us at support@avelo.com</p>",
         "color_scheme": "scheme-1",
         "padding_block_start": 40,
@@ -575,6 +722,9 @@
   "order": [
     "main",
     "avelo_trust",
+    "avelo_panels",
+    "avelo_tabs",
+    "avelo_media",
     "avelo_guarantee",
     "avelo_reviews",
     "product_recommendations_qggXJq",

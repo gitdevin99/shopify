@@ -1,0 +1,132 @@
+{%- comment -%}
+  AVELO — Image Panels ("Invisible Boost. Visible Results.")
+  Intro heading + paragraph, then a row of large image panels each with
+  an overlay caption. Matches the competitor's feature-panel band.
+{%- endcomment -%}
+
+{%- liquid
+  assign cs = section.settings.color_scheme
+-%}
+
+<div
+  class="avelo-panels color-{{ cs }} section"
+  style="
+    --avelo-panels-cols: {{ section.blocks.size }};
+    padding-block-start: {{ section.settings.padding_block_start }}px;
+    padding-block-end: {{ section.settings.padding_block_end }}px;
+  "
+>
+  <div class="avelo-panels__inner page-width">
+    {%- if section.settings.heading != blank or section.settings.body != blank -%}
+      <div class="avelo-panels__head">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="avelo-panels__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.body != blank -%}
+          <p class="avelo-panels__body">{{ section.settings.body }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="avelo-panels__grid">
+      {%- for block in section.blocks -%}
+        <div class="avelo-panels__panel" {{ block.shopify_attributes }}>
+          <div class="avelo-panels__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'avelo-panels__img', alt: block.settings.title }}
+            {%- else -%}
+              <div class="avelo-panels__placeholder">{{ 'image' | placeholder_svg_tag: 'avelo-panels__placeholder-svg' }}</div>
+            {%- endif -%}
+            <span class="avelo-panels__overlay" aria-hidden="true"></span>
+          </div>
+          <div class="avelo-panels__caption">
+            {%- if block.settings.eyebrow != blank -%}
+              <span class="avelo-panels__eyebrow">{{ block.settings.eyebrow }}</span>
+            {%- endif -%}
+            <span class="avelo-panels__title">{{ block.settings.title }}</span>
+            {%- if block.settings.text != blank -%}
+              <span class="avelo-panels__text">{{ block.settings.text }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- stylesheet -%}
+  .avelo-panels__head { text-align: center; max-width: 50rem; margin: 0 auto 3rem; }
+  .avelo-panels__heading {
+    font-family: var(--font-h2--family);
+    font-size: clamp(1.7rem, 3.6vw, 2.6rem);
+    line-height: 1.1; letter-spacing: -0.02em; margin: 0;
+    color: var(--color-foreground-heading, var(--color-foreground));
+  }
+  .avelo-panels__body { margin: 1rem 0 0; opacity: 0.7; font-size: 1.02rem; line-height: 1.55; }
+  .avelo-panels__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--avelo-panels-cols, 3), 1fr);
+    gap: 1.25rem;
+  }
+  .avelo-panels__panel { position: relative; border-radius: 16px; overflow: hidden; }
+  .avelo-panels__media { position: relative; aspect-ratio: 4 / 5; background: #111; }
+  .avelo-panels__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .avelo-panels__placeholder { width: 100%; height: 100%; }
+  .avelo-panels__placeholder-svg { width: 100%; height: 100%; opacity: 0.2; }
+  .avelo-panels__overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.05) 100%);
+  }
+  .avelo-panels__caption {
+    position: absolute; left: 1.5rem; right: 1.5rem; bottom: 1.5rem;
+    display: flex; flex-direction: column; gap: 0.35rem; color: #fff;
+  }
+  .avelo-panels__eyebrow {
+    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--avelo-gold, #b08d57); font-weight: 700;
+  }
+  .avelo-panels__title { font-family: var(--font-h3--family); font-size: 1.3rem; font-weight: 600; line-height: 1.15; }
+  .avelo-panels__text { font-size: 0.88rem; opacity: 0.88; line-height: 1.4; }
+  @media screen and (max-width: 749px) {
+    .avelo-panels__grid { grid-template-columns: 1fr; gap: 1rem; }
+    .avelo-panels__media { aspect-ratio: 16 / 11; }
+  }
+{%- endstylesheet -%}
+
+{% schema %}
+{
+  "name": "AVELO Image Panels",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Invisible boost. Visible results." },
+    { "type": "text", "id": "body", "label": "Body", "default": "Every pair is engineered with a precision-tuned midsole delivering up to 10cm of hidden height. All the lift, none of the look." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_block_start", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_block_end", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Panel",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Hidden elevation" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Up to 10cm taller" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Concealed inside the midsole" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVELO Image Panels",
+      "blocks": [
+        { "type": "panel", "settings": { "eyebrow": "Hidden elevation", "title": "Up to 10cm taller", "text": "Concealed inside the midsole" } },
+        { "type": "panel", "settings": { "eyebrow": "Undetectable", "title": "Looks like a normal shoe", "text": "No one can tell you're wearing it" } },
+        { "type": "panel", "settings": { "eyebrow": "Engineered", "title": "All-day comfort", "text": "Ergonomic, weight-balanced support" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
