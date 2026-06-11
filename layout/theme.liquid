@@ -32,6 +32,19 @@
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-schemes' -%}
 
+    {%- comment -%} AVELO: breathing room between the solid header and page content (not on the full-bleed homepage hero) {%- endcomment -%}
+    <style>
+      #MainContent[data-template^="product"],
+      #MainContent[data-template^="collection"],
+      #MainContent[data-template^="page"],
+      #MainContent[data-template^="blog"],
+      #MainContent[data-template^="article"],
+      #MainContent[data-template^="search"],
+      #MainContent[data-template^="list-collections"] {
+        padding-top: clamp(1.5rem, 3vw, 2.75rem);
+      }
+    </style>
+
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
     {% endif %}

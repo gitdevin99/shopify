@@ -1,0 +1,152 @@
+{%- comment -%}
+  AVELO — CTA Band with animated wave top
+  Black band with a curved/animated wave on its top edge, heading, subtext,
+  and two outlined buttons. Mirrors the competitor's pre-footer CTA.
+{%- endcomment -%}
+
+{%- liquid
+  assign cs = section.settings.color_scheme
+-%}
+
+<div class="avelo-cta">
+  <div class="avelo-cta__wave" aria-hidden="true">
+    <svg class="avelo-cta__wave-svg avelo-cta__wave-svg--back" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,56.0 L12,58.09 L24,60.16 L36,62.18 L48,64.13 L60,66.0 L72,67.76 L84,69.38 L96,70.86 L108,72.18 L120,73.32 L132,74.27 L144,75.02 L156,75.56 L168,75.89 L180,76.0 L192,75.89 L204,75.56 L216,75.02 L228,74.27 L240,73.32 L252,72.18 L264,70.86 L276,69.38 L288,67.76 L300,66.0 L312,64.13 L324,62.18 L336,60.16 L348,58.09 L360,56.0 L372,53.91 L384,51.84 L396,49.82 L408,47.87 L420,46.0 L432,44.24 L444,42.62 L456,41.14 L468,39.82 L480,38.68 L492,37.73 L504,36.98 L516,36.44 L528,36.11 L540,36.0 L552,36.11 L564,36.44 L576,36.98 L588,37.73 L600,38.68 L612,39.82 L624,41.14 L636,42.62 L648,44.24 L660,46.0 L672,47.87 L684,49.82 L696,51.84 L708,53.91 L720,56.0 L732,58.09 L744,60.16 L756,62.18 L768,64.13 L780,66.0 L792,67.76 L804,69.38 L816,70.86 L828,72.18 L840,73.32 L852,74.27 L864,75.02 L876,75.56 L888,75.89 L900,76.0 L912,75.89 L924,75.56 L936,75.02 L948,74.27 L960,73.32 L972,72.18 L984,70.86 L996,69.38 L1008,67.76 L1020,66.0 L1032,64.13 L1044,62.18 L1056,60.16 L1068,58.09 L1080,56.0 L1092,53.91 L1104,51.84 L1116,49.82 L1128,47.87 L1140,46.0 L1152,44.24 L1164,42.62 L1176,41.14 L1188,39.82 L1200,38.68 L1212,37.73 L1224,36.98 L1236,36.44 L1248,36.11 L1260,36.0 L1272,36.11 L1284,36.44 L1296,36.98 L1308,37.73 L1320,38.68 L1332,39.82 L1344,41.14 L1356,42.62 L1368,44.24 L1380,46.0 L1392,47.87 L1404,49.82 L1416,51.84 L1428,53.91 L1440,56.0 L1440,120 L0,120 Z"></path>
+    </svg>
+    <svg class="avelo-cta__wave-svg avelo-cta__wave-svg--front" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,84.0 L12,83.89 L24,83.56 L36,83.02 L48,82.27 L60,81.32 L72,80.18 L84,78.86 L96,77.38 L108,75.76 L120,74.0 L132,72.13 L144,70.18 L156,68.16 L168,66.09 L180,64.0 L192,61.91 L204,59.84 L216,57.82 L228,55.87 L240,54.0 L252,52.24 L264,50.62 L276,49.14 L288,47.82 L300,46.68 L312,45.73 L324,44.98 L336,44.44 L348,44.11 L360,44.0 L372,44.11 L384,44.44 L396,44.98 L408,45.73 L420,46.68 L432,47.82 L444,49.14 L456,50.62 L468,52.24 L480,54.0 L492,55.87 L504,57.82 L516,59.84 L528,61.91 L540,64.0 L552,66.09 L564,68.16 L576,70.18 L588,72.13 L600,74.0 L612,75.76 L624,77.38 L636,78.86 L648,80.18 L660,81.32 L672,82.27 L684,83.02 L696,83.56 L708,83.89 L720,84.0 L732,83.89 L744,83.56 L756,83.02 L768,82.27 L780,81.32 L792,80.18 L804,78.86 L816,77.38 L828,75.76 L840,74.0 L852,72.13 L864,70.18 L876,68.16 L888,66.09 L900,64.0 L912,61.91 L924,59.84 L936,57.82 L948,55.87 L960,54.0 L972,52.24 L984,50.62 L996,49.14 L1008,47.82 L1020,46.68 L1032,45.73 L1044,44.98 L1056,44.44 L1068,44.11 L1080,44.0 L1092,44.11 L1104,44.44 L1116,44.98 L1128,45.73 L1140,46.68 L1152,47.82 L1164,49.14 L1176,50.62 L1188,52.24 L1200,54.0 L1212,55.87 L1224,57.82 L1236,59.84 L1248,61.91 L1260,64.0 L1272,66.09 L1284,68.16 L1296,70.18 L1308,72.13 L1320,74.0 L1332,75.76 L1344,77.38 L1356,78.86 L1368,80.18 L1380,81.32 L1392,82.27 L1404,83.02 L1416,83.56 L1428,83.89 L1440,84.0 L1440,120 L0,120 Z"></path>
+    </svg>
+  </div>
+
+  <div class="avelo-cta__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="avelo-cta__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.body != blank -%}
+      <p class="avelo-cta__body">{{ section.settings.body }}</p>
+    {%- endif -%}
+    <div class="avelo-cta__buttons">
+      {%- if section.settings.button1_label != blank -%}
+        <a href="{{ section.settings.button1_link }}" class="avelo-cta__btn">{{ section.settings.button1_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.button2_label != blank -%}
+        <a href="{{ section.settings.button2_link }}" class="avelo-cta__btn">{{ section.settings.button2_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{%- stylesheet -%}
+  .avelo-cta.avelo-cta {
+    position: relative;
+    background-color: #000000;
+    color: #ffffff;
+    padding-block-start: clamp(7rem, 14vw, 11rem);
+    padding-block-end: clamp(4rem, 8vw, 6rem);
+    overflow: hidden;
+    width: 100%;
+    display: block;
+  }
+  .avelo-cta__wave {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    width: 100%;
+    height: clamp(60px, 9vw, 120px);
+    line-height: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .avelo-cta__wave-svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 200%;            /* two wave periods so a -50% slide is seamless */
+    min-width: 200%;
+    height: 100%;
+    display: block;
+    will-change: transform;
+  }
+  /* keep the band black behind the wave so any sub-pixel gap reads as black */
+  .avelo-cta__wave::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: transparent;
+  }
+  .avelo-cta__wave-svg--back  path { fill: #2a2a2a; }
+  .avelo-cta__wave-svg--front path { fill: #000000; }
+  /* the area ABOVE the curve must read as the previous (light) section */
+  .avelo-cta::before {
+    content: "";
+    position: absolute; top: -1px; left: 0; right: 0;
+    height: clamp(60px, 9vw, 120px);
+    background: #ffffff;
+    z-index: 0;
+  }
+  .avelo-cta__wave { z-index: 1; }
+  .avelo-cta__inner {
+    position: relative; z-index: 2;
+    text-align: center;
+    max-width: 52rem;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 1.5rem;
+  }
+
+  /* continuous flowing wave — each layer slides one full period and loops seamlessly */
+  .avelo-cta__wave-svg--back  { animation: avelo-wave-flow 9s linear infinite; }
+  .avelo-cta__wave-svg--front { animation: avelo-wave-flow 6s linear infinite; }
+  @keyframes avelo-wave-flow {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .avelo-cta__wave-svg { animation: none !important; }
+  }
+
+  .avelo-cta__heading {
+    font-family: var(--font-h2--family);
+    font-size: clamp(1.7rem, 4vw, 2.8rem);
+    line-height: 1.12; letter-spacing: -0.02em; margin: 0;
+    color: inherit;
+  }
+  .avelo-cta__body { margin: 1.1rem auto 0; max-width: 42rem; opacity: 0.8; line-height: 1.6; font-size: 1.05rem; }
+  .avelo-cta__buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.25rem; }
+  .avelo-cta__btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 12rem; padding: 1rem 2rem;
+    border: 1.5px solid currentColor;
+    color: inherit; text-decoration: none;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    border-radius: 4px;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  }
+  .avelo-cta__btn:hover {
+    background: var(--color-foreground, #fff);
+    color: var(--color-background, #000);
+    transform: translateY(-2px);
+  }
+  @media screen and (max-width: 480px) {
+    .avelo-cta__btn { min-width: 0; width: 100%; }
+  }
+{%- endstylesheet -%}
+
+{% schema %}
+{
+  "name": "AVELO CTA Band",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Worn by people who refuse to blend in." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Why blend in when you were born to stand out? Join 45,000+ who elevated more than just their height. With AVELO, you're not just taller — you're unstoppable." },
+    { "type": "text", "id": "button1_label", "label": "Button 1 label", "default": "Shop men's" },
+    { "type": "url", "id": "button1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "button2_label", "label": "Button 2 label", "default": "Shop women's" },
+    { "type": "url", "id": "button2_link", "label": "Button 2 link" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-5" }
+  ],
+  "presets": [
+    { "name": "AVELO CTA Band" }
+  ]
+}
+{% endschema %}
