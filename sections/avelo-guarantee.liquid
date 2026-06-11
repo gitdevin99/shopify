@@ -1,0 +1,85 @@
+{%- comment -%}
+  AVELO — Guarantee Banner
+  Seal/badge + heading + copy. Reassurance block for product pages.
+{%- endcomment -%}
+
+{%- liquid
+  assign cs = section.settings.color_scheme
+-%}
+
+<div
+  class="avelo-guar color-{{ cs }} section"
+  style="
+    padding-block-start: {{ section.settings.padding_block_start }}px;
+    padding-block-end: {{ section.settings.padding_block_end }}px;
+  "
+>
+  <div class="avelo-guar__inner page-width">
+    <div class="avelo-guar__seal" aria-hidden="true">
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="56" stroke="var(--avelo-gold, #b08d57)" stroke-width="2"/>
+        <circle cx="60" cy="60" r="48" stroke="var(--avelo-gold, #b08d57)" stroke-width="1" stroke-dasharray="2 4"/>
+        <path d="M42 60l12 12 24-26" stroke="var(--avelo-gold, #b08d57)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="60" y="26" text-anchor="middle" font-family="var(--font-body--family)" font-size="9" letter-spacing="2" fill="var(--avelo-gold, #b08d57)">{{ section.settings.seal_top }}</text>
+        <text x="60" y="102" text-anchor="middle" font-family="var(--font-body--family)" font-size="9" letter-spacing="2" fill="var(--avelo-gold, #b08d57)">{{ section.settings.seal_bottom }}</text>
+      </svg>
+    </div>
+    <div class="avelo-guar__text">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="avelo-guar__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <div class="avelo-guar__body rte">{{ section.settings.body }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{%- stylesheet -%}
+  .avelo-guar__inner {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 2.25rem 2.5rem;
+    border: 1px solid var(--color-border, rgba(0,0,0,0.12));
+    border-radius: 16px;
+    background: var(--color-background);
+  }
+  .avelo-guar__seal { flex-shrink: 0; width: 6rem; height: 6rem; }
+  .avelo-guar__seal svg { width: 100%; height: 100%; }
+  .avelo-guar__heading {
+    font-family: var(--font-h3--family);
+    font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+    line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 0.5rem;
+    color: var(--color-foreground-heading, var(--color-foreground));
+  }
+  .avelo-guar__body { opacity: 0.74; line-height: 1.55; font-size: 1rem; }
+  .avelo-guar__body > *:first-child { margin-top: 0; }
+  .avelo-guar__body > *:last-child { margin-bottom: 0; }
+  @media screen and (max-width: 749px) {
+    .avelo-guar__inner { flex-direction: column; text-align: center; gap: 1.5rem; padding: 2rem 1.5rem; }
+  }
+{%- endstylesheet -%}
+
+{% schema %}
+{
+  "name": "AVELO Guarantee",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "text", "id": "seal_top", "label": "Seal top text", "default": "30-DAY" },
+    { "type": "text", "id": "seal_bottom", "label": "Seal bottom text", "default": "GUARANTEE" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Not happy? Send them back." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Try AVELO risk-free for 30 days. If you don't love the way you look and feel, return them for a full refund — no questions asked. That's our promise.</p>" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_block_start", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_block_end", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "presets": [
+    { "name": "AVELO Guarantee" }
+  ]
+}
+{% endschema %}

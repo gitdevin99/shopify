@@ -1,0 +1,147 @@
+{%- comment -%}
+  AVELO — Product Reviews
+  Rating summary header + review cards (rating, title, body, author, photo).
+  Static demo reviews via blocks; swap for a real review app later.
+{%- endcomment -%}
+
+{%- liquid
+  assign cs = section.settings.color_scheme
+  assign rating = section.settings.average_rating
+-%}
+
+<div
+  class="avelo-rev color-{{ cs }} section"
+  style="
+    padding-block-start: {{ section.settings.padding_block_start }}px;
+    padding-block-end: {{ section.settings.padding_block_end }}px;
+  "
+>
+  <div class="avelo-rev__inner page-width">
+    <div class="avelo-rev__summary">
+      <div class="avelo-rev__summary-left">
+        <span class="avelo-rev__avg">{{ rating }}</span>
+        <div class="avelo-rev__summary-meta">
+          <span class="avelo-rev__stars avelo-rev__stars--lg" aria-hidden="true">★★★★★</span>
+          <span class="avelo-rev__count">{{ section.settings.review_count }}</span>
+        </div>
+      </div>
+      {%- if section.settings.heading != blank -%}
+        <h2 class="avelo-rev__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="avelo-rev__grid">
+      {%- for block in section.blocks -%}
+        <article class="avelo-rev__card" {{ block.shopify_attributes }}>
+          <div class="avelo-rev__card-head">
+            <span class="avelo-rev__stars" aria-hidden="true">★★★★★</span>
+            {%- if block.settings.verified -%}
+              <span class="avelo-rev__verified">Verified</span>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.title != blank -%}
+            <p class="avelo-rev__title">{{ block.settings.title }}</p>
+          {%- endif -%}
+          <p class="avelo-rev__body">{{ block.settings.body }}</p>
+          <div class="avelo-rev__author">
+            {%- if block.settings.image != blank -%}
+              <span class="avelo-rev__avatar">
+                {{ block.settings.image | image_url: width: 80 | image_tag: loading: 'lazy', alt: block.settings.name }}
+              </span>
+            {%- endif -%}
+            <span class="avelo-rev__name">{{ block.settings.name }}</span>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- stylesheet -%}
+  .avelo-rev__inner { max-width: 56rem; margin: 0 auto; }
+  .avelo-rev__summary {
+    display: flex; align-items: center; gap: 2rem;
+    padding-bottom: 2rem; margin-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border, rgba(0,0,0,0.1));
+    flex-wrap: wrap;
+  }
+  .avelo-rev__summary-left { display: flex; align-items: center; gap: 1rem; }
+  .avelo-rev__avg {
+    font-family: var(--font-h1--family);
+    font-size: 3.2rem; font-weight: 600; line-height: 1; letter-spacing: -0.02em;
+  }
+  .avelo-rev__summary-meta { display: flex; flex-direction: column; gap: 0.25rem; }
+  .avelo-rev__stars { color: var(--avelo-gold, #b08d57); letter-spacing: 0.06em; }
+  .avelo-rev__stars--lg { font-size: 1.2rem; }
+  .avelo-rev__count { font-size: 0.85rem; opacity: 0.65; }
+  .avelo-rev__heading {
+    font-family: var(--font-h3--family);
+    font-size: clamp(1.2rem, 2.4vw, 1.6rem); margin: 0; margin-left: auto;
+    letter-spacing: -0.01em;
+  }
+  .avelo-rev__grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;
+  }
+  .avelo-rev__card {
+    border: 1px solid var(--color-border, rgba(0,0,0,0.1));
+    border-radius: 14px; padding: 1.5rem;
+    display: flex; flex-direction: column; gap: 0.7rem;
+    background: var(--color-background);
+  }
+  .avelo-rev__card-head { display: flex; align-items: center; justify-content: space-between; }
+  .avelo-rev__verified {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--avelo-gold, #b08d57);
+  }
+  .avelo-rev__title { font-weight: 600; font-size: 1rem; margin: 0; }
+  .avelo-rev__body { margin: 0; font-size: 0.95rem; line-height: 1.55; opacity: 0.8; flex: 1; }
+  .avelo-rev__author { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.3rem; }
+  .avelo-rev__avatar { width: 2rem; height: 2rem; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+  .avelo-rev__avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .avelo-rev__name { font-weight: 600; font-size: 0.88rem; }
+  @media screen and (max-width: 749px) {
+    .avelo-rev__grid { grid-template-columns: 1fr; }
+    .avelo-rev__heading { margin-left: 0; flex-basis: 100%; }
+  }
+{%- endstylesheet -%}
+
+{% schema %}
+{
+  "name": "AVELO Reviews",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "text", "id": "average_rating", "label": "Average rating", "default": "4.8" },
+    { "type": "text", "id": "review_count", "label": "Review count text", "default": "Based on 2,847 reviews" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What customers are saying" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_block_start", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_block_end", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Avatar" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Exceeded expectations" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Comfortable from the first wear and the height boost is genuinely undetectable. Worth every penny." },
+        { "type": "text", "id": "name", "label": "Name", "default": "Michael B." },
+        { "type": "checkbox", "id": "verified", "label": "Verified", "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVELO Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "title": "Genuinely undetectable", "body": "I was worried people would notice but absolutely no one can tell. I feel taller and way more confident in meetings.", "name": "Michael B.", "verified": true } },
+        { "type": "review", "settings": { "title": "Most comfortable shoes I own", "body": "Forget the height boost — these are just incredibly comfortable. The midsole is unreal. I wear them every day.", "name": "David L.", "verified": true } },
+        { "type": "review", "settings": { "title": "Worth it for the confidence", "body": "Added a few cm and it genuinely changed how I carry myself. Quality is excellent too, feels premium.", "name": "Chris P.", "verified": true } },
+        { "type": "review", "settings": { "title": "Ordered a second pair", "body": "Loved the first pair so much I bought another color. Sizing was perfect, shipping was fast. Highly recommend.", "name": "Tom W.", "verified": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,446 @@
+{%- comment -%}
+  AVELO — Before / After Height Comparison
+  Two figures side by side (regular footwear vs AVELO) with height labels
+  and a measurement axis. The signature conversion element.
+{%- endcomment -%}
+
+{%- liquid
+  assign cs = section.settings.color_scheme
+-%}
+
+<div
+  class="avelo-ba color-{{ cs }} section"
+  style="
+    padding-block-start: {{ section.settings.padding_block_start }}px;
+    padding-block-end: {{ section.settings.padding_block_end }}px;
+  "
+>
+  <div class="avelo-ba__inner page-width">
+    <div class="avelo-ba__head">
+      {%- if section.settings.kicker != blank -%}
+        <p class="avelo-ba__kicker">{{ section.settings.kicker }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="avelo-ba__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="avelo-ba__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="avelo-ba__stage">
+      <!-- measurement axis -->
+      <div class="avelo-ba__axis" aria-hidden="true">
+        <span class="avelo-ba__tick avelo-ba__tick--top"><i></i></span>
+        <span class="avelo-ba__tick avelo-ba__tick--bottom"><i></i></span>
+      </div>
+
+      <div class="avelo-ba__col avelo-ba__col--before">
+        <div class="avelo-ba__figure">
+          {%- if section.settings.image_before != blank -%}
+            {{ section.settings.image_before | image_url: width: 700 | image_tag: loading: 'lazy', class: 'avelo-ba__img', alt: 'Before' }}
+          {%- else -%}
+            <div class="avelo-ba__placeholder">{{ 'image' | placeholder_svg_tag: 'avelo-ba__placeholder-svg' }}</div>
+          {%- endif -%}
+          <span class="avelo-ba__line avelo-ba__line--before"></span>
+        </div>
+        <div class="avelo-ba__meta">
+          <span class="avelo-ba__label">{{ section.settings.label_before }}</span>
+          <span class="avelo-ba__value">{{ section.settings.height_before }}</span>
+        </div>
+      </div>
+
+      <div class="avelo-ba__vs" aria-hidden="true">
+        <span>{{ section.settings.vs_text }}</span>
+      </div>
+
+      <div class="avelo-ba__col avelo-ba__col--after">
+        <div class="avelo-ba__figure avelo-ba__figure--after">
+          {%- if section.settings.image_after != blank -%}
+            {{ section.settings.image_after | image_url: width: 700 | image_tag: loading: 'lazy', class: 'avelo-ba__img', alt: 'After' }}
+          {%- else -%}
+            <div class="avelo-ba__placeholder">{{ 'image' | placeholder_svg_tag: 'avelo-ba__placeholder-svg' }}</div>
+          {%- endif -%}
+          <span class="avelo-ba__line avelo-ba__line--after"></span>
+          <span class="avelo-ba__badge">{{ section.settings.lift_badge }}</span>
+        </div>
+        <div class="avelo-ba__meta">
+          <span class="avelo-ba__label avelo-ba__label--gold">{{ section.settings.label_after }}</span>
+          <span class="avelo-ba__value avelo-ba__value--gold">{{ section.settings.height_after }}</span>
+        </div>
+      </div>
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="avelo-ba__points">
+        {%- for block in section.blocks -%}
+          <li class="avelo-ba__point" {{ block.shopify_attributes }}>
+            <span class="avelo-ba__check" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 10.5L8 14.5L16 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="avelo-ba__point-text">{{ block.settings.text }}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank -%}
+      <div class="avelo-ba__cta">
+        <a href="{{ section.settings.button_link }}" class="button avelo-ba__button">
+          {{ section.settings.button_label }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- stylesheet -%}
+  .avelo-ba__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .avelo-ba__head {
+    text-align: center;
+    max-width: 50rem;
+    margin-bottom: 4rem;
+  }
+  .avelo-ba__kicker {
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--avelo-gold, #b08d57);
+    font-weight: 600;
+    margin: 0 0 0.9rem;
+  }
+  .avelo-ba__heading {
+    font-family: var(--font-h2--family);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--color-foreground-heading, var(--color-foreground));
+  }
+  .avelo-ba__subheading {
+    margin: 1.1rem 0 0;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    opacity: 0.7;
+  }
+  .avelo-ba__stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    gap: clamp(1rem, 5vw, 4rem);
+    width: 100%;
+    max-width: 56rem;
+    padding-bottom: 1rem;
+  }
+  .avelo-ba__col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .avelo-ba__figure {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: var(--color-background);
+    border-radius: var(--border-radius, 4px);
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  /* the "before" person is visually shorter */
+  .avelo-ba__col--before .avelo-ba__figure { aspect-ratio: 3 / 3.6; }
+  .avelo-ba__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    display: block;
+  }
+  .avelo-ba__placeholder { width: 100%; height: 100%; }
+  .avelo-ba__placeholder-svg { width: 100%; height: 100%; opacity: 0.15; }
+  .avelo-ba__line {
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--color-foreground);
+    opacity: 0.35;
+  }
+  .avelo-ba__line--before { top: 8%; }
+  .avelo-ba__line--after { top: 2%; background: var(--avelo-gold, #b08d57); opacity: 0.9; }
+  .avelo-ba__badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--avelo-gold, #b08d57);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.7rem;
+    border-radius: 100px;
+  }
+  .avelo-ba__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 1.4rem;
+  }
+  .avelo-ba__label {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    font-weight: 600;
+  }
+  .avelo-ba__label--gold { color: var(--avelo-gold, #b08d57); opacity: 1; }
+  .avelo-ba__value {
+    font-family: var(--font-h2--family);
+    font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .avelo-ba__value--gold { color: var(--avelo-gold, #b08d57); }
+  .avelo-ba__vs {
+    align-self: center;
+    margin-bottom: 4rem;
+  }
+  .avelo-ba__vs span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-border, rgba(0,0,0,0.15));
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.65;
+  }
+  .avelo-ba__axis {
+    position: absolute;
+    left: -0.5rem;
+    top: 0;
+    bottom: 5.5rem;
+    width: 1px;
+    background: var(--color-border, rgba(0,0,0,0.12));
+  }
+  .avelo-ba__tick {
+    position: absolute;
+    left: -3px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--color-foreground);
+    opacity: 0.4;
+  }
+  .avelo-ba__tick--top { top: 0; }
+  .avelo-ba__tick--bottom { bottom: 0; }
+  .avelo-ba__points {
+    list-style: none;
+    margin: 4rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem 2.5rem;
+    max-width: 48rem;
+    width: 100%;
+  }
+  .avelo-ba__point {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  .avelo-ba__check {
+    flex-shrink: 0;
+    width: 1.5rem; height: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--avelo-gold, #b08d57);
+    color: #fff;
+    margin-top: 1px;
+  }
+  .avelo-ba__check svg { width: 0.9rem; height: 0.9rem; }
+  .avelo-ba__cta { margin-top: 3rem; }
+  .avelo-ba__button {
+    text-decoration: none;
+  }
+  @media screen and (max-width: 749px) {
+    .avelo-ba__stage { gap: 0.75rem; }
+    .avelo-ba__vs { margin-bottom: 3rem; }
+    .avelo-ba__vs span { width: 2.4rem; height: 2.4rem; font-size: 0.7rem; }
+    .avelo-ba__points { grid-template-columns: 1fr; gap: 1rem; }
+    .avelo-ba__axis { display: none; }
+    .avelo-ba__head { margin-bottom: 2.5rem; }
+  }
+{%- endstylesheet -%}
+
+{% schema %}
+{
+  "name": "AVELO Before / After",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Regular footwear vs AVELO"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Not just another sneaker."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "The same person. The same outfit. One pair of AVELO."
+    },
+    {
+      "type": "header",
+      "content": "Before"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_before",
+      "label": "Before image"
+    },
+    {
+      "type": "text",
+      "id": "label_before",
+      "label": "Before label",
+      "default": "Regular footwear"
+    },
+    {
+      "type": "text",
+      "id": "height_before",
+      "label": "Before height",
+      "default": "172 cm"
+    },
+    {
+      "type": "header",
+      "content": "After"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_after",
+      "label": "After image"
+    },
+    {
+      "type": "text",
+      "id": "label_after",
+      "label": "After label",
+      "default": "Wearing AVELO"
+    },
+    {
+      "type": "text",
+      "id": "height_after",
+      "label": "After height",
+      "default": "180 cm"
+    },
+    {
+      "type": "text",
+      "id": "lift_badge",
+      "label": "Lift badge",
+      "default": "+8 cm"
+    },
+    {
+      "type": "text",
+      "id": "vs_text",
+      "label": "VS text",
+      "default": "vs"
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_block_start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_block_end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Checklist point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Invisible elevation — no one can tell"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVELO Before / After",
+      "blocks": [
+        { "type": "point", "settings": { "text": "Invisible elevation — no one can tell" } },
+        { "type": "point", "settings": { "text": "Engineered midsole, all-day comfort" } },
+        { "type": "point", "settings": { "text": "Premium materials that last" } },
+        { "type": "point", "settings": { "text": "Up to 12 cm across the collection" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

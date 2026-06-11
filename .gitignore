@@ -1,0 +1,14 @@
+# OS
+.DS_Store
+*.swp
+
+# Shopify CLI / dev
+.shopify/
+*.zip
+
+# Theme export folders
+theme_export__*
+
+# node (if any tooling lands here)
+node_modules/
+.claude/

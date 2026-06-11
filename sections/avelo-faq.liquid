@@ -1,0 +1,151 @@
+{%- comment -%}
+  AVELO — FAQ Accordion
+  Accessible <details>/<summary> accordion. Works without JS.
+{%- endcomment -%}
+
+{%- liquid
+  assign cs = section.settings.color_scheme
+-%}
+
+<div
+  class="avelo-faq color-{{ cs }} section"
+  style="
+    padding-block-start: {{ section.settings.padding_block_start }}px;
+    padding-block-end: {{ section.settings.padding_block_end }}px;
+  "
+>
+  <div class="avelo-faq__inner page-width">
+    <div class="avelo-faq__head">
+      {%- if section.settings.kicker != blank -%}
+        <p class="avelo-faq__kicker">{{ section.settings.kicker }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="avelo-faq__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="avelo-faq__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="avelo-faq__list">
+      {%- for block in section.blocks -%}
+        <details class="avelo-faq__item" {{ block.shopify_attributes }}>
+          <summary class="avelo-faq__q">
+            <span>{{ block.settings.question }}</span>
+            <span class="avelo-faq__icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </span>
+          </summary>
+          <div class="avelo-faq__a rte">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.footer_text != blank -%}
+      <p class="avelo-faq__footer rte">{{ section.settings.footer_text }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- stylesheet -%}
+  .avelo-faq__inner { max-width: 48rem; margin: 0 auto; }
+  .avelo-faq__head { text-align: center; margin-bottom: 2.5rem; }
+  .avelo-faq__kicker {
+    font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--avelo-gold, #b08d57); font-weight: 600; margin: 0 0 0.9rem;
+  }
+  .avelo-faq__heading {
+    font-family: var(--font-h2--family);
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    line-height: 1.1; letter-spacing: -0.02em; margin: 0;
+    color: var(--color-foreground-heading, var(--color-foreground));
+  }
+  .avelo-faq__subheading { margin: 0.9rem 0 0; opacity: 0.7; font-size: 1rem; }
+  .avelo-faq__list {
+    border-top: 1px solid var(--color-border, rgba(0,0,0,0.1));
+  }
+  .avelo-faq__item {
+    border-bottom: 1px solid var(--color-border, rgba(0,0,0,0.1));
+  }
+  .avelo-faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.35rem 0.25rem;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    line-height: 1.4;
+  }
+  .avelo-faq__q::-webkit-details-marker { display: none; }
+  .avelo-faq__icon {
+    flex-shrink: 0;
+    width: 1.6rem; height: 1.6rem;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--color-border, rgba(0,0,0,0.18));
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+  }
+  .avelo-faq__icon svg { width: 0.85rem; height: 0.85rem; }
+  .avelo-faq__item[open] .avelo-faq__icon {
+    transform: rotate(45deg);
+    background: var(--avelo-gold, #b08d57);
+    color: #fff;
+    border-color: var(--avelo-gold, #b08d57);
+  }
+  .avelo-faq__a {
+    padding: 0 0.25rem 1.5rem;
+    opacity: 0.78;
+    line-height: 1.6;
+    max-width: 42rem;
+  }
+  .avelo-faq__a > *:first-child { margin-top: 0; }
+  .avelo-faq__footer {
+    text-align: center;
+    margin-top: 2.5rem;
+    opacity: 0.7;
+    font-size: 0.95rem;
+  }
+{%- endstylesheet -%}
+
+{% schema %}
+{
+  "name": "AVELO FAQ",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Good to know" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently asked questions" },
+    { "type": "text", "id": "subheading", "label": "Subheading" },
+    { "type": "richtext", "id": "footer_text", "label": "Footer text", "default": "<p>Still have a question? Email us at support@avelo.com</p>" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_block_start", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_block_end", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Who is AVELO for?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>AVELO is for anyone who wants a confident boost in height — discreetly. Our shoes are engineered to add up to 12cm while looking and feeling like premium everyday footwear.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVELO FAQ",
+      "blocks": [
+        { "type": "faq", "settings": { "question": "Will anyone be able to tell I'm wearing elevator shoes?", "answer": "<p>No. The elevation is built entirely inside the shoe with a precision-engineered midsole. From the outside, AVELO looks exactly like a premium designer sneaker or dress shoe.</p>" } },
+        { "type": "faq", "settings": { "question": "Are they comfortable enough for all-day wear?", "answer": "<p>Yes. Every pair uses an ergonomic, weight-distributing midsole with memory-foam cushioning. They're designed to be worn from morning to night without discomfort.</p>" } },
+        { "type": "faq", "settings": { "question": "How do I choose my size?", "answer": "<p>Order your normal shoe size — AVELO fits true to size. If you're between sizes, we recommend sizing up. Check the size guide on each product page for details.</p>" } },
+        { "type": "faq", "settings": { "question": "What's your return policy?", "answer": "<p>We offer a 30-day money-back guarantee. If you're not completely happy, send them back for a full refund — no questions asked.</p>" } },
+        { "type": "faq", "settings": { "question": "How long does shipping take?", "answer": "<p>Orders are processed within 1–2 business days. Standard shipping typically arrives within 5–9 business days, with free shipping on all orders over $80.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

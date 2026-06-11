@@ -1,0 +1,746 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "kicker": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Height-increasing footwear, redefined</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "0.8rem",
+            "line_height": "normal",
+            "letter_spacing": "0.22em",
+            "case": "uppercase",
+            "wrap": "pretty",
+            "color": "#e9d9bf",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          }
+        },
+        "heading": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Stand taller.<br>Feel unstoppable.</p>",
+            "width": "fit-content",
+            "max_width": "wide",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-h1--family)",
+            "font_size": "clamp(2.6rem, 6vw, 5.2rem)",
+            "line_height": "0.98",
+            "letter_spacing": "-0.03em",
+            "case": "none",
+            "wrap": "balance",
+            "color": "#ffffff",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          }
+        },
+        "sub": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Up to 12cm of invisible elevation. Engineered for confidence, built to be worn all day.</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1.1rem",
+            "line_height": "1.5",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "#f3f0ea",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 8,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          }
+        },
+        "cta_primary": {
+          "type": "button",
+          "settings": {
+            "label": "Shop men",
+            "link": "shopify://collections/men",
+            "open_in_new_tab": false,
+            "style_class": "button-primary",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          }
+        },
+        "cta_secondary": {
+          "type": "button",
+          "settings": {
+            "label": "Shop women",
+            "link": "shopify://collections/women",
+            "open_in_new_tab": false,
+            "style_class": "button-secondary",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          }
+        }
+      },
+      "block_order": [
+        "kicker",
+        "heading",
+        "sub",
+        "cta_primary",
+        "cta_secondary"
+      ],
+      "name": "Hero",
+      "settings": {
+        "media_type_1": "image",
+        "image_1": "shopify://shop_images/photo-1473966968600-fa801b869a1a.jpg",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 22,
+        "section_width": "full-width",
+        "section_height": "custom",
+        "section_height_custom": 88,
+        "color_scheme": "scheme-6",
+        "toggle_overlay": true,
+        "overlay_color": "#0a0a0acc",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "features": {
+      "type": "avelo-feature-row",
+      "blocks": {
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "icon": "height",
+            "title": "Up to 12cm taller",
+            "text": "Invisible hidden elevation"
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "icon": "discreet",
+            "title": "Completely discreet",
+            "text": "Looks like a normal sneaker"
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "icon": "comfort",
+            "title": "All-day comfort",
+            "text": "Engineered ergonomic midsole"
+          }
+        },
+        "f4": {
+          "type": "feature",
+          "settings": {
+            "icon": "guarantee",
+            "title": "30-day guarantee",
+            "text": "Love it or your money back"
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
+      "name": "Feature row",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_block_start": 36,
+        "padding_block_end": 36
+      }
+    },
+    "split": {
+      "type": "avelo-lifestyle-grid",
+      "blocks": {
+        "men": {
+          "type": "scene",
+          "settings": {
+            "image": "shopify://shop_images/photo-1507680434567-5739c80be1ac.jpg",
+            "label": "Men",
+            "sublabel": "Built to dominate every room",
+            "link": "shopify://collections/men"
+          }
+        },
+        "women": {
+          "type": "scene",
+          "settings": {
+            "image": "shopify://shop_images/photo-1496747611176-843222e1e57c.jpg",
+            "label": "Women",
+            "sublabel": "Designed to empower every step",
+            "link": "shopify://collections/women"
+          }
+        }
+      },
+      "block_order": [
+        "men",
+        "women"
+      ],
+      "name": "Shop by gender",
+      "settings": {
+        "kicker": "Find your fit",
+        "heading": "Two collections. One mission.",
+        "color_scheme": "scheme-1",
+        "padding_block_start": 72,
+        "padding_block_end": 48
+      }
+    },
+    "best_sellers": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "Header",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "center",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 8,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "kicker": {
+              "type": "_product-list-text",
+              "name": "Kicker",
+              "settings": {
+                "text": "<p>Best sellers</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.8rem",
+                "line_height": "normal",
+                "letter_spacing": "0.22em",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--avelo-gold)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 4,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "title": {
+              "type": "_product-list-text",
+              "name": "Title",
+              "settings": {
+                "text": "<h2>The shoes 45,000+ chose</h2>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h2",
+                "font": "var(--font-h2--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            }
+          },
+          "block_order": [
+            "kicker",
+            "title"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "Product card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 8,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "gallery": {
+              "type": "_product-card-gallery",
+              "name": "Media",
+              "settings": {
+                "image_ratio": "portrait",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "title": {
+              "type": "product-title",
+              "name": "Title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "price": {
+              "type": "price",
+              "name": "Price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            }
+          },
+          "block_order": [
+            "gallery",
+            "title",
+            "price"
+          ]
+        }
+      },
+      "name": "Best sellers",
+      "settings": {
+        "collection": "best-sellers",
+        "layout_type": "grid",
+        "carousel_on_mobile": true,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "70cqw",
+        "columns_gap": 16,
+        "rows_gap": 36,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "center",
+        "gap": 36,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      }
+    },
+    "lifestyle": {
+      "type": "avelo-lifestyle-grid",
+      "blocks": {
+        "everyday": {
+          "type": "scene",
+          "settings": {
+            "image": "shopify://shop_images/photo-1490578474895-699cd4e2cf59.jpg",
+            "label": "Everyday",
+            "sublabel": "Effortless from coffee to closing time",
+            "link": "shopify://collections/men"
+          }
+        },
+        "athletic": {
+          "type": "scene",
+          "settings": {
+            "image": "shopify://shop_images/photo-1538805060514-97d9cc17730c_28905fe2-e6ee-4aa0-b360-e2b0f20d4db4.jpg",
+            "label": "Athletic",
+            "sublabel": "Lightweight lift that keeps up",
+            "link": "shopify://collections/men"
+          }
+        },
+        "formal": {
+          "type": "scene",
+          "settings": {
+            "image": "shopify://shop_images/photo-1507003211169-0a1dd7228f2d_f888635e-c447-4a20-a416-d297a528292f.jpg",
+            "label": "Formal",
+            "sublabel": "Boardroom presence, redefined",
+            "link": "shopify://collections/men"
+          }
+        }
+      },
+      "block_order": [
+        "everyday",
+        "athletic",
+        "formal"
+      ],
+      "name": "Own every setting",
+      "settings": {
+        "kicker": "Built for life",
+        "heading": "Own every setting.",
+        "color_scheme": "scheme-1",
+        "padding_block_start": 72,
+        "padding_block_end": 72
+      }
+    },
+    "before_after": {
+      "type": "avelo-before-after",
+      "blocks": {
+        "p1": {
+          "type": "point",
+          "settings": {
+            "text": "Invisible elevation — no one can tell"
+          }
+        },
+        "p2": {
+          "type": "point",
+          "settings": {
+            "text": "Engineered midsole, all-day comfort"
+          }
+        },
+        "p3": {
+          "type": "point",
+          "settings": {
+            "text": "Premium full-grain materials"
+          }
+        },
+        "p4": {
+          "type": "point",
+          "settings": {
+            "text": "Up to 12cm across the collection"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "name": "Before / after",
+      "settings": {
+        "kicker": "Regular footwear vs AVELO",
+        "heading": "The same you. 8cm taller.",
+        "subheading": "Same person. Same outfit. One pair of AVELO.",
+        "image_before": "shopify://shop_images/photo-1507003211169-0a1dd7228f2d.jpg",
+        "label_before": "Regular footwear",
+        "height_before": "172 cm",
+        "image_after": "shopify://shop_images/photo-1538805060514-97d9cc17730c.jpg",
+        "label_after": "Wearing AVELO",
+        "height_after": "180 cm",
+        "lift_badge": "+8 cm",
+        "vs_text": "vs",
+        "button_label": "Shop the collection",
+        "button_link": "shopify://collections/best-sellers",
+        "color_scheme": "scheme-2",
+        "padding_block_start": 96,
+        "padding_block_end": 96
+      }
+    },
+    "stats": {
+      "type": "avelo-stats",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "value": "45,000+",
+            "label": "Customers who increased their height"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "value": "65%",
+            "label": "Reordered a second pair within a year"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "value": "93%",
+            "label": "Report feeling more confident and present"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "name": "Stats",
+      "settings": {
+        "kicker": "The numbers",
+        "heading": "Worn by people who refuse to blend in",
+        "color_scheme": "scheme-1",
+        "padding_block_start": 88,
+        "padding_block_end": 88
+      }
+    },
+    "ugc": {
+      "type": "avelo-ugc-video",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "value": "45,000+",
+            "label": "Increased their height"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "value": "65%",
+            "label": "Ordered a second pair"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "value": "93%",
+            "label": "Felt more confident"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "name": "UGC video",
+      "settings": {
+        "kicker": "Real reactions",
+        "heading": "People's reactions: NYC edition",
+        "body": "<p>We hit the streets of New York and handed out AVELO to random people on the spot. Here's exactly what they said.</p>",
+        "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "poster": "shopify://shop_images/photo-1521572163474-6864f9cf17ab.jpg",
+        "button_label": "Shop now",
+        "button_link": "shopify://collections/best-sellers",
+        "color_scheme": "scheme-1",
+        "padding_block_start": 96,
+        "padding_block_end": 96
+      }
+    },
+    "comparison": {
+      "type": "avelo-comparison",
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "feature": "Up to 12cm of invisible height",
+            "other_has": false
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "feature": "Engineered ergonomic midsole",
+            "other_has": false
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "feature": "Premium full-grain materials",
+            "other_has": true
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "feature": "All-day, no-pain comfort",
+            "other_has": false
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "feature": "Looks like a normal sneaker",
+            "other_has": true
+          }
+        },
+        "r6": {
+          "type": "row",
+          "settings": {
+            "feature": "30-day money-back guarantee",
+            "other_has": false
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6"
+      ],
+      "name": "Comparison",
+      "settings": {
+        "kicker": "The difference",
+        "heading": "Why people choose AVELO",
+        "brand_name": "AVELO",
+        "other_name": "Others",
+        "button_label": "Shop the collection",
+        "button_link": "shopify://collections/best-sellers",
+        "color_scheme": "scheme-1",
+        "padding_block_start": 96,
+        "padding_block_end": 96
+      }
+    },
+    "testimonials": {
+      "type": "avelo-testimonials",
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/photo-1490578474895-699cd4e2cf59.jpg",
+            "quote": "I genuinely feel taller and so much more confident. They just look like great sneakers — no one can tell.",
+            "name": "James R.",
+            "verified": true
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/photo-1507003211169-0a1dd7228f2d_f888635e-c447-4a20-a416-d297a528292f.jpg",
+            "quote": "Bought these for my wedding and got compliments all night. The comfort honestly shocked me.",
+            "name": "Daniel K.",
+            "verified": true
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/photo-1538805060514-97d9cc17730c_28905fe2-e6ee-4aa0-b360-e2b0f20d4db4.jpg",
+            "quote": "I'm 5'7\" and wanted a boost for work meetings. Perfect, and so easy to wear all day.",
+            "name": "Marcus T.",
+            "verified": true
+          }
+        },
+        "t4": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/photo-1487412720507-e7ab37603c6f.jpg",
+            "quote": "Was skeptical but the height is real and totally invisible. Already ordered my second pair.",
+            "name": "Aisha N.",
+            "verified": true
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "name": "Testimonials",
+      "settings": {
+        "rating_text": "Rated 4.8 / 5 by 45,000+ customers",
+        "heading": "45,000+ success stories",
+        "color_scheme": "scheme-2",
+        "padding_block_start": 96,
+        "padding_block_end": 96
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "features",
+    "split",
+    "best_sellers",
+    "lifestyle",
+    "before_after",
+    "stats",
+    "ugc",
+    "comparison",
+    "testimonials"
+  ]
+}

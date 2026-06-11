@@ -1,0 +1,134 @@
+{%- comment -%}
+  AVELO — Feature / Trust Icon Row
+  Compact row of icon + title + text trust signals (e.g. under the hero).
+{%- endcomment -%}
+
+{%- liquid
+  assign cs = section.settings.color_scheme
+-%}
+
+{%- capture icon_svgs -%}{%- endcapture -%}
+
+<div
+  class="avelo-feat color-{{ cs }} section"
+  style="
+    --avelo-feat-cols: {{ section.blocks.size }};
+    padding-block-start: {{ section.settings.padding_block_start }}px;
+    padding-block-end: {{ section.settings.padding_block_end }}px;
+  "
+>
+  <div class="avelo-feat__inner page-width">
+    <div class="avelo-feat__grid">
+      {%- for block in section.blocks -%}
+        <div class="avelo-feat__item" {{ block.shopify_attributes }}>
+          <span class="avelo-feat__icon" aria-hidden="true">
+            {%- case block.settings.icon -%}
+              {%- when 'height' -%}
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {%- when 'discreet' -%}
+                <svg viewBox="0 0 24 24" fill="none"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+              {%- when 'comfort' -%}
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20.8 8.6c-1.3-2.4-4.4-3-6.3-1.1L12 9.9 9.5 7.5c-1.9-1.9-5-1.3-6.3 1.1-1 1.9-.6 4.3 1 5.8L12 21l7.8-6.6c1.6-1.5 2-3.9 1-5.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              {%- when 'shipping' -%}
+                <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.8" stroke="currentColor" stroke-width="1.6"/><circle cx="17.5" cy="18" r="1.8" stroke="currentColor" stroke-width="1.6"/></svg>
+              {%- when 'guarantee' -%}
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 9-4-0.7-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {%- when 'returns' -%}
+                <svg viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 109-9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3 5v4h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {%- endcase -%}
+          </span>
+          <div class="avelo-feat__text">
+            <span class="avelo-feat__title">{{ block.settings.title }}</span>
+            {%- if block.settings.text != blank -%}
+              <span class="avelo-feat__desc">{{ block.settings.text }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- stylesheet -%}
+  .avelo-feat__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--avelo-feat-cols, 3), 1fr);
+    gap: 1.5rem 2.5rem;
+    align-items: center;
+  }
+  .avelo-feat__item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .avelo-feat__icon {
+    flex-shrink: 0;
+    width: 2.6rem; height: 2.6rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--avelo-gold, #b08d57);
+  }
+  .avelo-feat__icon svg { width: 100%; height: 100%; }
+  .avelo-feat__text { display: flex; flex-direction: column; gap: 0.1rem; }
+  .avelo-feat__title { font-weight: 600; font-size: 0.95rem; line-height: 1.25; }
+  .avelo-feat__desc { font-size: 0.82rem; line-height: 1.35; opacity: 0.65; }
+  @media screen and (max-width: 749px) {
+    .avelo-feat__grid { grid-template-columns: 1fr; gap: 1.25rem; }
+    .avelo-feat__item { justify-content: flex-start; }
+  }
+{%- endstylesheet -%}
+
+{% schema %}
+{
+  "name": "AVELO Feature Row",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_block_start", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_block_end", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "height", "label": "Height arrows" },
+            { "value": "discreet", "label": "Discreet (eye)" },
+            { "value": "comfort", "label": "Comfort (heart)" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "guarantee", "label": "Guarantee (shield)" },
+            { "value": "returns", "label": "Returns" },
+            { "value": "check", "label": "Check" }
+          ],
+          "default": "height"
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Instant height boost" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Up to 12cm of invisible elevation" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVELO Feature Row",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "height", "title": "Instant height boost", "text": "Up to 12cm of invisible elevation" } },
+        { "type": "feature", "settings": { "icon": "discreet", "title": "Completely discreet", "text": "Looks just like a normal sneaker" } },
+        { "type": "feature", "settings": { "icon": "comfort", "title": "All-day comfort", "text": "Engineered ergonomic midsole" } },
+        { "type": "feature", "settings": { "icon": "guarantee", "title": "30-day guarantee", "text": "Love it or your money back" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

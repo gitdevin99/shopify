@@ -1,0 +1,229 @@
+{%- comment -%}
+  AVELO — Social Proof Stat Bar
+  Clean row of headline stats (45,000+, 65%, 93%) with labels.
+  Block-based so each stat is editable / addable in the theme editor.
+{%- endcomment -%}
+
+{%- liquid
+  assign cs = section.settings.color_scheme
+-%}
+
+<div
+  class="avelo-stats color-{{ cs }} section"
+  style="
+    --avelo-stats-cols: {{ section.blocks.size }};
+    padding-block-start: {{ section.settings.padding_block_start }}px;
+    padding-block-end: {{ section.settings.padding_block_end }}px;
+  "
+>
+  <div class="avelo-stats__inner page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="avelo-stats__heading-wrap">
+        {%- if section.settings.kicker != blank -%}
+          <p class="avelo-stats__kicker">{{ section.settings.kicker }}</p>
+        {%- endif -%}
+        <h2 class="avelo-stats__heading">{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    <div class="avelo-stats__grid">
+      {%- for block in section.blocks -%}
+        <div class="avelo-stats__item" {{ block.shopify_attributes }}>
+          <span class="avelo-stats__value">{{ block.settings.value }}</span>
+          {%- if block.settings.label != blank -%}
+            <span class="avelo-stats__label">{{ block.settings.label }}</span>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- stylesheet -%}
+  .avelo-stats__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.5rem;
+  }
+  .avelo-stats__heading-wrap {
+    text-align: center;
+    max-width: 46rem;
+  }
+  .avelo-stats__kicker {
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--avelo-gold, #b08d57);
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+  }
+  .avelo-stats__heading {
+    font-family: var(--font-h2--family);
+    font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--color-foreground-heading, var(--color-foreground));
+  }
+  .avelo-stats__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--avelo-stats-cols, 3), 1fr);
+    width: 100%;
+    gap: 2rem;
+  }
+  .avelo-stats__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    position: relative;
+    padding: 0 1.5rem;
+  }
+  .avelo-stats__item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 56%;
+    width: 1px;
+    background: var(--color-border, rgba(0,0,0,0.12));
+  }
+  .avelo-stats__value {
+    font-family: var(--font-h1--family);
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-foreground-heading, var(--color-foreground));
+  }
+  .avelo-stats__label {
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: var(--color-foreground);
+    opacity: 0.72;
+    max-width: 18rem;
+  }
+  @media screen and (max-width: 749px) {
+    .avelo-stats__grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .avelo-stats__item {
+      padding: 0;
+    }
+    .avelo-stats__item:not(:last-child)::after {
+      display: none;
+    }
+    .avelo-stats__item:not(:last-child) {
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--color-border, rgba(0,0,0,0.1));
+    }
+    .avelo-stats__inner { gap: 2.5rem; }
+  }
+{%- endstylesheet -%}
+
+{% schema %}
+{
+  "name": "AVELO Stats",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "The numbers"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Worn by people who refuse to blend in"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_block_start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_block_end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "45,000+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Customers who increased their height"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVELO Stats",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "value": "45,000+",
+            "label": "Customers who increased their height"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "65%",
+            "label": "Reordered a second pair within a year"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "93%",
+            "label": "Report feeling more confident and present"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
