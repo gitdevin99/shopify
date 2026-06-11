@@ -1,0 +1,84 @@
+{%- comment -%}
+  AVELO — Trust Grid block (2×2)
+  Icon + label rows for the buy box: Worldwide Shipping, 30-Day Money Back,
+  Easy Returns & Exchanges, Secure Checkout. Icons are inline SVG by key.
+{%- endcomment -%}
+
+<div
+  class="avelo-trustgrid"
+  style="
+    padding-block-start: {{ block.settings.padding-block-start }}px;
+    padding-block-end: {{ block.settings.padding-block-end }}px;
+  "
+  {{ block.shopify_attributes }}
+>
+  {%- assign items = block.settings.items | newline_to_br | split: '<br />' -%}
+  <ul class="avelo-trustgrid__list">
+    {%- for raw in items -%}
+      {%- assign line = raw | strip -%}
+      {%- if line != blank -%}
+        {%- assign parts = line | split: '|' -%}
+        {%- assign icon = parts[0] | strip -%}
+        {%- assign label = parts[1] | strip -%}
+        <li class="avelo-trustgrid__item">
+          <span class="avelo-trustgrid__icon" aria-hidden="true">
+            {%- case icon -%}
+              {%- when 'shipping' -%}
+                <svg viewBox="0 0 24 24" fill="none"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7" cy="17.5" r="1.6" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="17.5" r="1.6" stroke="currentColor" stroke-width="1.5"/></svg>
+              {%- when 'guarantee' -%}
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 9-4-.7-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {%- when 'returns' -%}
+                <svg viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 109-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M3 5v4h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {%- when 'secure' -%}
+                <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="1.5"/></svg>
+              {%- when 'support' -%}
+                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M9.5 9.5a2.5 2.5 0 113.5 2.3c-.7.3-1 .8-1 1.7M12 16.5h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {%- endcase -%}
+          </span>
+          <span class="avelo-trustgrid__label">{{ label }}</span>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</div>
+
+{%- stylesheet -%}
+  .avelo-trustgrid__list {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0.9rem 1.5rem;
+  }
+  .avelo-trustgrid__item { display: flex; align-items: center; gap: 0.65rem; }
+  .avelo-trustgrid__icon {
+    flex-shrink: 0; width: 1.5rem; height: 1.5rem;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--avelo-gold, #b08d57);
+  }
+  .avelo-trustgrid__icon svg { width: 100%; height: 100%; }
+  .avelo-trustgrid__label { font-size: 0.85rem; line-height: 1.3; opacity: 0.85; }
+  @media screen and (max-width: 480px) {
+    .avelo-trustgrid__list { grid-template-columns: 1fr; }
+  }
+{%- endstylesheet -%}
+
+{% schema %}
+{
+  "name": "AVELO Trust Grid",
+  "tag": null,
+  "settings": [
+    {
+      "type": "textarea", "id": "items", "label": "Items (one per line: icon|label)",
+      "info": "Icons: shipping, guarantee, returns, secure, support, check",
+      "default": "shipping|Worldwide Shipping\nguarantee|30-Day Money Back Policy\nreturns|Easy Returns & Exchanges\nsecure|Secure Checkout"
+    },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding-block-start", "label": "Top padding", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 12 },
+    { "type": "range", "id": "padding-block-end", "label": "Bottom padding", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 12 }
+  ],
+  "presets": [
+    { "name": "AVELO Trust Grid", "category": "Product" }
+  ]
+}
+{% endschema %}

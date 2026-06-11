@@ -17,8 +17,8 @@
             "thumbnail_position": "bottom",
             "thumbnail_width": 44,
             "aspect_ratio": "1",
-            "constrain_to_viewport": true,
-            "media_fit": "contain",
+            "constrain_to_viewport": false,
+            "media_fit": "cover",
             "media_radius": 0,
             "extend_media": false,
             "zoom": true,
@@ -270,6 +270,42 @@
                 "row_desc",
                 "row_ship"
               ]
+            },
+            "fit_slider": {
+              "type": "avelo-fit-slider",
+              "settings": {
+                "label": "Fit (Compared to Nike, Adidas, On, etc.)",
+                "position": 50,
+                "left_label": "Runs small",
+                "center_label": "True to size",
+                "right_label": "Runs large",
+                "helper_text": "This model fits true to size. We recommend choosing your usual size. Please refer to the size guide below.",
+                "link_label": "Find your perfect size",
+                "link_url": "",
+                "padding-block-start": 10,
+                "padding-block-end": 10
+              },
+              "blocks": {}
+            },
+            "trust_grid": {
+              "type": "avelo-trust-grid",
+              "settings": {
+                "items": "shipping|Worldwide Shipping\nguarantee|30-Day Money Back Policy\nreturns|Easy Returns & Exchanges\nsecure|Secure Checkout",
+                "padding-block-start": 16,
+                "padding-block-end": 8
+              },
+              "blocks": {}
+            },
+            "divider2": {
+              "type": "_divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
@@ -278,7 +314,10 @@
             "price",
             "shipping_note",
             "variant_picker",
+            "fit_slider",
             "buy_buttons",
+            "trust_grid",
+            "divider2",
             "description"
           ]
         }

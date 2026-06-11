@@ -1,0 +1,113 @@
+{%- comment -%}
+  AVELO — Fit Slider block
+  "Fit (Compared to Nike, Adidas, On, etc.)" with a Runs Small / True to Size /
+  Runs Large indicator + helper text + "Find your perfect size" link.
+  Pure CSS, no interactivity needed (it's an informational indicator).
+{%- endcomment -%}
+
+<div
+  class="avelo-fit"
+  style="
+    padding-block-start: {{ block.settings.padding-block-start }}px;
+    padding-block-end: {{ block.settings.padding-block-end }}px;
+  "
+  {{ block.shopify_attributes }}
+>
+  <p class="avelo-fit__label">{{ block.settings.label }}</p>
+
+  <div class="avelo-fit__track" style="--avelo-fit-pos: {{ block.settings.position }}%;">
+    <div class="avelo-fit__line"></div>
+    <span class="avelo-fit__knob"></span>
+  </div>
+
+  <div class="avelo-fit__scale">
+    <span>{{ block.settings.left_label }}</span>
+    <span>{{ block.settings.center_label }}</span>
+    <span>{{ block.settings.right_label }}</span>
+  </div>
+
+  {%- if block.settings.helper_text != blank -%}
+    <p class="avelo-fit__helper">{{ block.settings.helper_text }}</p>
+  {%- endif -%}
+
+  {%- if block.settings.link_label != blank -%}
+    <a href="{{ block.settings.link_url | default: '#' }}" class="avelo-fit__link">
+      {{ block.settings.link_label }}
+      <span aria-hidden="true">→</span>
+    </a>
+  {%- endif -%}
+</div>
+
+{%- stylesheet -%}
+  .avelo-fit { width: 100%; }
+  .avelo-fit__label {
+    font-weight: 600; font-size: 0.95rem; margin: 0 0 0.9rem;
+    color: var(--color-foreground-heading, var(--color-foreground));
+  }
+  .avelo-fit__track {
+    position: relative;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  .avelo-fit__line {
+    position: absolute; left: 0; right: 0; height: 3px;
+    background: var(--color-foreground);
+    opacity: 0.18;
+    border-radius: 3px;
+  }
+  .avelo-fit__knob {
+    position: absolute;
+    left: var(--avelo-fit-pos, 50%);
+    transform: translateX(-50%);
+    width: 1.15rem; height: 1.15rem;
+    border-radius: 50%;
+    background: var(--color-foreground);
+    border: 3px solid var(--color-background);
+    box-shadow: 0 0 0 1px var(--color-foreground);
+  }
+  .avelo-fit__scale {
+    display: flex; justify-content: space-between;
+    font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase;
+    font-weight: 600; opacity: 0.6;
+  }
+  .avelo-fit__scale span:nth-child(2) { opacity: 1; color: var(--avelo-gold, #b08d57); }
+  .avelo-fit__helper {
+    font-size: 0.82rem; line-height: 1.45; opacity: 0.62; margin: 0.75rem 0 0;
+  }
+  .avelo-fit__link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    margin-top: 0.9rem;
+    font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--color-foreground-heading, var(--color-foreground));
+    text-decoration: none;
+    border-bottom: 1.5px solid currentColor;
+    padding-bottom: 2px;
+    transition: gap 0.2s ease;
+  }
+  .avelo-fit__link:hover { gap: 0.7rem; }
+{%- endstylesheet -%}
+
+{% schema %}
+{
+  "name": "AVELO Fit Slider",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Fit (Compared to Nike, Adidas, On, etc.)" },
+    { "type": "range", "id": "position", "label": "Indicator position", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "text", "id": "left_label", "label": "Left label", "default": "Runs small" },
+    { "type": "text", "id": "center_label", "label": "Center label", "default": "True to size" },
+    { "type": "text", "id": "right_label", "label": "Right label", "default": "Runs large" },
+    { "type": "textarea", "id": "helper_text", "label": "Helper text", "default": "This model fits true to size. We recommend choosing your usual size. Please refer to the size guide below." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Find your perfect size" },
+    { "type": "url", "id": "link_url", "label": "Link URL" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding-block-start", "label": "Top padding", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 8 },
+    { "type": "range", "id": "padding-block-end", "label": "Bottom padding", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 8 }
+  ],
+  "presets": [
+    { "name": "AVELO Fit Slider", "category": "Product" }
+  ]
+}
+{% endschema %}

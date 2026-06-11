@@ -1,7 +1,8 @@
 {%- comment -%}
-  AVELO — Tabbed Features ("Advantage, Engineered.")
-  CSS-only tabs (hidden radio inputs) so it works with no external JS.
-  Each tab = a block with a label, image, heading, body, and bullet list.
+  AVELO — Advantage carousel ("Advantage, Engineered.")
+  3 panels in a horizontal scroll-snap track. Swipe / drag / use the pill
+  nav to move between them. Pure CSS scroll-snap + a tiny scroll script for
+  the nav buttons and active state. Works without JS (still scrollable).
 {%- endcomment -%}
 
 {%- liquid
@@ -10,162 +11,204 @@
 -%}
 
 <div
-  class="avelo-tabs color-{{ cs }} section"
+  class="avelo-adv color-{{ cs }} section"
   style="
     padding-block-start: {{ section.settings.padding_block_start }}px;
     padding-block-end: {{ section.settings.padding_block_end }}px;
   "
+  data-avelo-adv="{{ uid }}"
 >
-  <div class="avelo-tabs__inner page-width">
-    <div class="avelo-tabs__head">
+  <div class="avelo-adv__inner page-width">
+    <div class="avelo-adv__head">
       {%- if section.settings.kicker != blank -%}
-        <p class="avelo-tabs__kicker">{{ section.settings.kicker }}</p>
+        <p class="avelo-adv__kicker">{{ section.settings.kicker }}</p>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
-        <h2 class="avelo-tabs__heading">{{ section.settings.heading }}</h2>
+        <h2 class="avelo-adv__heading">{{ section.settings.heading }}</h2>
       {%- endif -%}
     </div>
 
-    <div class="avelo-tabs__component">
-      {%- comment -%} radio inputs drive the CSS-only tab state {%- endcomment -%}
+    {%- if section.blocks.size > 1 -%}
+      <div class="avelo-adv__nav" role="tablist">
+        {%- for block in section.blocks -%}
+          <button
+            type="button"
+            class="avelo-adv__pill{% if forloop.first %} is-active{% endif %}"
+            data-index="{{ forloop.index0 }}"
+          >{{ block.settings.label }}</button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="avelo-adv__viewport">
+    <div class="avelo-adv__track page-width" data-adv-track>
       {%- for block in section.blocks -%}
-        <input
-          type="radio"
-          name="avelo_tabs_{{ uid }}"
-          id="tab_{{ uid }}_{{ forloop.index }}"
-          class="avelo-tabs__radio avelo-tabs__radio--{{ forloop.index }}"
-          {% if forloop.first %}checked{% endif %}
-          hidden
-        >
-      {%- endfor -%}
-
-      <div class="avelo-tabs__nav" role="tablist">
-        {%- for block in section.blocks -%}
-          <label for="tab_{{ uid }}_{{ forloop.index }}" class="avelo-tabs__tab" {{ block.shopify_attributes }}>
-            {{ block.settings.label }}
-          </label>
-        {%- endfor -%}
-      </div>
-
-      <div class="avelo-tabs__panels">
-        {%- for block in section.blocks -%}
-          <div class="avelo-tabs__panel avelo-tabs__panel--{{ forloop.index }}">
-            <div class="avelo-tabs__media">
-              {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'avelo-tabs__img', alt: block.settings.label }}
-              {%- else -%}
-                <div class="avelo-tabs__placeholder">{{ 'image' | placeholder_svg_tag: 'avelo-tabs__placeholder-svg' }}</div>
-              {%- endif -%}
-            </div>
-            <div class="avelo-tabs__content">
-              {%- if block.settings.heading != blank -%}
-                <h3 class="avelo-tabs__panel-heading">{{ block.settings.heading }}</h3>
-              {%- endif -%}
-              {%- if block.settings.body != blank -%}
-                <p class="avelo-tabs__panel-body">{{ block.settings.body }}</p>
-              {%- endif -%}
-              {%- if block.settings.bullets != blank -%}
-                <ul class="avelo-tabs__bullets">
-                  {%- assign items = block.settings.bullets | split: '|' -%}
-                  {%- for item in items -%}
-                    <li>
-                      <span class="avelo-tabs__check" aria-hidden="true">
-                        <svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5L8 14.5L16 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                      </span>
-                      {{ item | strip }}
-                    </li>
-                  {%- endfor -%}
-                </ul>
-              {%- endif -%}
-            </div>
+        <article class="avelo-adv__panel" data-adv-slide="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <div class="avelo-adv__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'avelo-adv__img', alt: block.settings.label }}
+            {%- else -%}
+              <div class="avelo-adv__placeholder">{{ 'image' | placeholder_svg_tag: 'avelo-adv__placeholder-svg' }}</div>
+            {%- endif -%}
           </div>
-        {%- endfor -%}
-      </div>
+          <div class="avelo-adv__content">
+            <span class="avelo-adv__index">{{ forloop.index }} / {{ section.blocks.size }}</span>
+            {%- if block.settings.label != blank -%}
+              <span class="avelo-adv__eyebrow">{{ block.settings.label }}</span>
+            {%- endif -%}
+            {%- if block.settings.heading != blank -%}
+              <h3 class="avelo-adv__panel-heading">{{ block.settings.heading }}</h3>
+            {%- endif -%}
+            {%- if block.settings.body != blank -%}
+              <p class="avelo-adv__panel-body">{{ block.settings.body }}</p>
+            {%- endif -%}
+            {%- if block.settings.bullets != blank -%}
+              <ul class="avelo-adv__bullets">
+                {%- assign items = block.settings.bullets | split: '|' -%}
+                {%- for item in items -%}
+                  <li>
+                    <span class="avelo-adv__check" aria-hidden="true">
+                      <svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5L8 14.5L16 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                    {{ item | strip }}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
     </div>
   </div>
 </div>
 
 {%- stylesheet -%}
-  .avelo-tabs__head { text-align: center; margin-bottom: 2.5rem; }
-  .avelo-tabs__kicker {
+  .avelo-adv__inner { margin-bottom: 2rem; }
+  .avelo-adv__head { text-align: center; margin-bottom: 1.75rem; }
+  .avelo-adv__kicker {
     font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
     color: var(--avelo-gold, #b08d57); font-weight: 600; margin: 0 0 0.9rem;
   }
-  .avelo-tabs__heading {
+  .avelo-adv__heading {
     font-family: var(--font-h2--family);
     font-size: clamp(1.7rem, 3.6vw, 2.6rem);
     line-height: 1.1; letter-spacing: -0.02em; margin: 0;
     color: var(--color-foreground-heading, var(--color-foreground));
   }
-  .avelo-tabs__nav {
-    display: inline-flex;
-    gap: 0.25rem;
-    padding: 0.3rem;
-    border-radius: 100px;
+  .avelo-adv__nav {
+    display: flex; justify-content: center; gap: 0.25rem;
+    padding: 0.3rem; border-radius: 100px;
     background: color-mix(in srgb, var(--color-foreground) 6%, transparent);
-    margin: 0 auto 2.5rem;
-    width: fit-content;
-    left: 50%;
-    position: relative;
-    transform: translateX(-50%);
+    width: fit-content; margin: 0 auto;
   }
-  .avelo-tabs__tab {
-    padding: 0.6rem 1.4rem;
-    border-radius: 100px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
-    white-space: nowrap;
-    color: var(--color-foreground);
-    opacity: 0.7;
+  .avelo-adv__pill {
+    border: 0; background: transparent; cursor: pointer;
+    padding: 0.55rem 1.4rem; border-radius: 100px;
+    font-size: 0.9rem; font-weight: 600; font-family: inherit;
+    color: var(--color-foreground); opacity: 0.65;
+    transition: background 0.2s ease, opacity 0.2s ease, color 0.2s ease;
   }
-  .avelo-tabs__tab:hover { opacity: 1; }
-  .avelo-tabs__panel { display: none; }
-  .avelo-tabs__panel {
+  .avelo-adv__pill:hover { opacity: 1; }
+  .avelo-adv__pill.is-active {
+    background: var(--color-background);
+    color: var(--color-foreground-heading, var(--color-foreground));
+    opacity: 1; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  .avelo-adv__viewport { overflow: hidden; }
+  .avelo-adv__track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    gap: clamp(1rem, 3vw, 2rem);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+  }
+  .avelo-adv__track::-webkit-scrollbar { display: none; }
+  .avelo-adv__panel {
+    scroll-snap-align: center;
+    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: clamp(1.5rem, 5vw, 4rem);
     align-items: center;
   }
-  /* Show the panel + activate the tab that matches the checked radio */
-  {%- for block in section.blocks -%}
-    .avelo-tabs__radio--{{ forloop.index }}:checked ~ .avelo-tabs__panels .avelo-tabs__panel--{{ forloop.index }} { display: grid; }
-    .avelo-tabs__radio--{{ forloop.index }}:checked ~ .avelo-tabs__nav .avelo-tabs__tab:nth-child({{ forloop.index }}) {
-      background: var(--color-background);
-      color: var(--color-foreground-heading, var(--color-foreground));
-      opacity: 1;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    }
-  {%- endfor -%}
-  .avelo-tabs__media { border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 3; background: #111; }
-  .avelo-tabs__img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .avelo-tabs__placeholder { width: 100%; height: 100%; }
-  .avelo-tabs__placeholder-svg { width: 100%; height: 100%; opacity: 0.2; }
-  .avelo-tabs__panel-heading {
+  .avelo-adv__media { border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 3; background: #111; }
+  .avelo-adv__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .avelo-adv__placeholder { width: 100%; height: 100%; }
+  .avelo-adv__placeholder-svg { width: 100%; height: 100%; opacity: 0.2; }
+  .avelo-adv__index {
+    display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em;
+    color: var(--avelo-gold, #b08d57); margin-bottom: 0.6rem;
+  }
+  .avelo-adv__eyebrow {
+    display: block; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+    font-weight: 700; opacity: 0.5; margin-bottom: 0.5rem;
+  }
+  .avelo-adv__panel-heading {
     font-family: var(--font-h3--family);
     font-size: clamp(1.4rem, 2.8vw, 1.9rem);
     line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 0.9rem;
     color: var(--color-foreground-heading, var(--color-foreground));
   }
-  .avelo-tabs__panel-body { margin: 0 0 1.25rem; opacity: 0.74; line-height: 1.6; font-size: 1.02rem; }
-  .avelo-tabs__bullets { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.8rem; }
-  .avelo-tabs__bullets li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 1rem; line-height: 1.4; }
-  .avelo-tabs__check {
+  .avelo-adv__panel-body { margin: 0 0 1.25rem; opacity: 0.74; line-height: 1.6; font-size: 1.02rem; }
+  .avelo-adv__bullets { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.8rem; }
+  .avelo-adv__bullets li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 1rem; line-height: 1.4; }
+  .avelo-adv__check {
     flex-shrink: 0; width: 1.4rem; height: 1.4rem; margin-top: 1px;
     display: inline-flex; align-items: center; justify-content: center;
     border-radius: 50%; background: var(--avelo-gold, #b08d57); color: #fff;
   }
-  .avelo-tabs__check svg { width: 0.85rem; height: 0.85rem; }
+  .avelo-adv__check svg { width: 0.85rem; height: 0.85rem; }
   @media screen and (max-width: 749px) {
-    .avelo-tabs__panel { grid-template-columns: 1fr; gap: 1.5rem; }
-    .avelo-tabs__media { aspect-ratio: 16 / 11; }
-    .avelo-tabs__nav { width: 100%; overflow-x: auto; justify-content: flex-start; }
+    .avelo-adv__panel { grid-template-columns: 1fr; gap: 1.5rem; }
+    .avelo-adv__media { aspect-ratio: 16 / 11; }
   }
 {%- endstylesheet -%}
 
+<script>
+  (function () {
+    var root = document.querySelector('[data-avelo-adv="{{ uid }}"]');
+    if (!root) return;
+    var track = root.querySelector('[data-adv-track]');
+    var pills = Array.prototype.slice.call(root.querySelectorAll('.avelo-adv__pill'));
+    var slides = Array.prototype.slice.call(root.querySelectorAll('[data-adv-slide]'));
+    if (!track) return;
+
+    pills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        var i = parseInt(pill.getAttribute('data-index'), 10) || 0;
+        var slide = slides[i];
+        if (slide) track.scrollTo({ left: slide.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+      });
+    });
+
+    // Update active pill on scroll
+    var raf = null;
+    track.addEventListener('scroll', function () {
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = null;
+        var center = track.scrollLeft + track.clientWidth / 2;
+        var best = 0, bestDist = Infinity;
+        slides.forEach(function (s, i) {
+          var sc = s.offsetLeft - track.offsetLeft + s.clientWidth / 2;
+          var d = Math.abs(sc - center);
+          if (d < bestDist) { bestDist = d; best = i; }
+        });
+        pills.forEach(function (p, i) { p.classList.toggle('is-active', i === best); });
+      });
+    }, { passive: true });
+  })();
+</script>
+
 {% schema %}
 {
-  "name": "AVELO Tabbed Features",
+  "name": "AVELO Advantage Carousel",
   "tag": "section",
   "class": "section-wrapper",
   "settings": [
@@ -179,9 +222,9 @@
   "blocks": [
     {
       "type": "tab",
-      "name": "Tab",
+      "name": "Panel",
       "settings": [
-        { "type": "text", "id": "label", "label": "Tab label", "default": "Engineered" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Engineered" },
         { "type": "image_picker", "id": "image", "label": "Image" },
         { "type": "text", "id": "heading", "label": "Heading", "default": "Precision-engineered elevation" },
         { "type": "textarea", "id": "body", "label": "Body", "default": "A multi-density midsole adds hidden height while keeping the shoe balanced and natural to walk in." },
@@ -191,7 +234,7 @@
   ],
   "presets": [
     {
-      "name": "AVELO Tabbed Features",
+      "name": "AVELO Advantage Carousel",
       "blocks": [
         { "type": "tab", "settings": { "label": "Engineered", "heading": "Precision-engineered elevation", "body": "A multi-density midsole adds hidden height while keeping the shoe balanced and natural to walk in.", "bullets": "Up to 12cm of hidden lift|Weight-balanced for stability|Looks like a standard sole" } },
         { "type": "tab", "settings": { "label": "Impact", "heading": "Shock-absorbing every step", "body": "A responsive cushioning core absorbs impact and returns energy, so all-day wear feels effortless.", "bullets": "High-rebound foam core|Reduced joint fatigue|Stable heel-to-toe transition" } },
