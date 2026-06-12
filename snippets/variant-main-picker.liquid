@@ -40,12 +40,24 @@
           assign swatch_count = product_option.values | map: 'swatch' | compact | size
           assign variant_style = block_settings.variant_style
 
+          # AVELO: image-swatch fallback. When an option has no formal swatches
+          # but its variants have images (e.g. Taobao-imported color options),
+          # show the variant image as a thumbnail next to each option button.
+          assign image_swatch_count = 0
+          for ov in product_option.values
+            if ov.variant.featured_media != blank
+              assign image_swatch_count = image_swatch_count | plus: 1
+            endif
+          endfor
+
           if swatch_count > 0 and block_settings.show_swatches
             if block_settings.variant_style == 'dropdown'
               assign variant_style = 'swatch_dropdown'
             else
               assign variant_style = 'swatch'
             endif
+          elsif image_swatch_count > 1 and block_settings.show_swatches and block_settings.variant_style != 'dropdown'
+            assign variant_style = 'swatch'
           endif
 
           if variant_style == 'buttons' and settings.variant_button_width == 'equal-width-buttons'
@@ -130,6 +142,8 @@
                     variant_image: featured_media,
                     mode: 'unscaled'
                   %}
+                  {%- comment -%} AVELO: show the option name next to the thumbnail (Taobao-style) {%- endcomment -%}
+                  <span class="variant-option__swatch-label">{{ product_option_value | escape }}</span>
                 {% else %}
                   {% if product_option_value.available == true %}
                     <span
@@ -225,6 +239,50 @@
 {% endunless %}
 
 {% stylesheet %}
+  /* AVELO: Taobao-style swatch rows — thumbnail + visible label.
+     Only applies when a swatch button also has our text label. */
+  .variant-option--swatches:has(.variant-option__swatch-label) {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .variant-option__button-label--has-swatch:has(.variant-option__swatch-label) {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--color-border, rgba(0,0,0,0.14));
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .variant-option__button-label--has-swatch:has(.variant-option__swatch-label):hover {
+    border-color: var(--color-foreground, #000);
+  }
+  /* selected state: the radio is checked */
+  .variant-option__button-label--has-swatch:has(input:checked) {
+    border-color: var(--color-foreground, #000);
+    border-width: 2px;
+    background: color-mix(in srgb, var(--color-foreground) 4%, transparent);
+  }
+  .variant-option__button-label--has-swatch .variant-option__swatch-label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--color-foreground, #000);
+  }
+  /* make the thumbnail a clean rounded square */
+  .variant-option__button-label--has-swatch:has(.variant-option__swatch-label) .swatch {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid var(--color-border, rgba(0,0,0,0.1));
+  }
+
   /* Variant picker container styles - unique to main variant picker */
   .variant-picker {
     width: 100%;
